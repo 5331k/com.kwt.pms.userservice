@@ -1,0 +1,31 @@
+server:
+  port : 7004
+  servlet:
+    session:
+      timeout: 60m  # 1 hour of inactivity
+      cookie:
+        same-site: Lax  # Strict may block SSR or cross-origin
+        secure: false   # true in production w/ HTTPS
+
+application:
+  description: "@project.description@"
+  version: "@project.version@"
+  title: "User Service"
+
+logging:
+  level:
+    org.springdoc: INFO
+    org.springframework.web: INFO
+
+spring:
+  jpa:
+    database: POSTGRESQL
+    hibernate:
+      ddl-auto: none
+  datasource:
+    url: jdbc:postgresql://${DATABASE_URL}/${DATABASE_NAME}
+    username: ${DATABASE_USERNAME}
+    password: ${DATABASE_PASSWORD}
+  sql.init.platform: org.hibernate.dialect.PostgreSQLDialect
+
+
