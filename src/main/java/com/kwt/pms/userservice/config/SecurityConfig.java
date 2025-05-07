@@ -19,7 +19,7 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(csrf -> csrf.disable()) // For development; enable in production
-                .authorizeHttpRequests(auth -> auth.requestMatchers("/api/auth/login",
+                .authorizeHttpRequests(auth -> auth.requestMatchers("/api/auth/login","/api/auth/session-test",
                         "/api/auth/logout").permitAll().requestMatchers(
                         "/api/auth/me").permitAll().anyRequest().authenticated()).sessionManagement(
                         session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)).formLogin(

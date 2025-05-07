@@ -5,9 +5,9 @@
 
 package com.kwt.pms.userservice.rest;
 
+import com.kwt.pms.common.auth.LoginResponse;
 import com.kwt.pms.userservice.service.AuthService;
 import com.kwt.pms.userservice.service.dto.request.LoginRequest;
-import com.kwt.pms.userservice.service.dto.response.LoginResponse;
 import jakarta.servlet.http.HttpSession;
 import lombok.RequiredArgsConstructor;
 import org.apache.logging.log4j.LogManager;
@@ -49,5 +49,13 @@ public class AuthController {
     public ResponseEntity<?> logout(HttpSession session) {
         session.invalidate();
         return ResponseEntity.ok("Logged out");
+    }
+
+
+    @GetMapping("/session-test")
+    public String test(HttpSession session) {
+        session.setAttribute("user", "redis-test");
+        System.out.println("✅ Session created with ID: " + session.getId());
+        return "Session written";
     }
 }

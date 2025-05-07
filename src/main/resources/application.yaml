@@ -1,9 +1,12 @@
 server:
+  address: 0.0.0.0
   port : 7004
   servlet:
     session:
       timeout: 60m  # 1 hour of inactivity
       cookie:
+        path: /
+        name: JSESSIONID
         same-site: Lax  # Strict may block SSR or cross-origin
         secure: false   # true in production w/ HTTPS
 
@@ -16,8 +19,17 @@ logging:
   level:
     org.springdoc: INFO
     org.springframework.web: INFO
+    org.springframework.data.redis: DEBUG
+    org.springframework.session: DEBUG
 
 spring:
+  session:
+    store-type: redis
+    timeout: 30m
+  data:
+    redis:
+      host: 192.168.197.183
+      port: 6379
   jpa:
     database: POSTGRESQL
     hibernate:
